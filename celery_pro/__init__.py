@@ -1,7 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import unicode_literals, absolute_import
+import sys
+import os
+PACKAGE_PATH = os.path.dirname(os.path.dirname(__file__))
 
-from celery import Celery
+sys.path.append(PACKAGE_PATH)
 
-app = Celery('tasks', broker='redis://', backend='redis://', include=['celery_pro.tasks'])
+from celery import Celery  # noqa
+
+
+print sys.path
+# default transport kombu.transport.redis.Transport
+
+
+# custom transport fkredis.transport.Transport
+# from fkredis.transport import Transport
+app = Celery('tasks', broker='fkredis.transport.Transport+redis://',
+             backend='redis://', include=['celery_pro.tasks'])
