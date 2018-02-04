@@ -9,8 +9,6 @@ sys.path.append(PACKAGE_PATH)
 
 from celery import Celery  # noqa
 
-
-print sys.path
 # default transport kombu.transport.redis.Transport
 
 
